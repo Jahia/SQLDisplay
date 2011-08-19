@@ -1,0 +1,7 @@
+<jnt = 'http://www.jahia.org/jahia/nt/1.0'>
+<jmix = 'http://www.jahia.org/jahia/mix/1.0'>
+
+[jnt:DBSqlDisplay] > jnt:content, jmix:queryContent, mix:title
+ - selectStatement (string) i18n mandatory
+ - dataSource (string) i18n mandatory
+ - pageSize (long) mandatory
