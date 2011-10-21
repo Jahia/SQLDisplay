@@ -6,51 +6,64 @@
 <%@ taglib prefix="utility" uri="http://www.jahia.org/tags/utilityLib" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-<template:addResources type="css" resources="dbsql.css"/>
-<script type="text/javascript" src="/modules/SQLDisplay/javascript/dbsql.js"></script>
-<!-- Sample query: SELECT * FROM jahia.jahia_qrtz_triggers j -->
+<template:addResources type="css" resources="dbSqlDisplay.css"/>
+<script type="text/javascript" src="/modules/SQLDisplay/javascript/jquery.dataTables.min.js"></script>
+<template:addResources type="javascript" resources="jquery.min.js"/>
 
-<div id="DB Module">
-			<span class="header"><fmt:message key='jnt_DBSqlDisplay.title'/></span>
-			<br/><b>Executed query:</b> ${currentNode.properties['selectStatement'].string}	
+<!-- Sample query: SELECT * FROM jahia.jahia_qrtz_triggers j -->
+		<div id="DB Module">
+			<span class="header">${currentNode.properties["jcr:title"].string}</span>
+			<br/><b><fmt:message key='jnt_DBSqlDisplay.executeLabel'/>:</b> ${currentNode.properties['selectStatement'].string}	
 			<c:choose>
 				<c:when test="${!renderContext.editMode}">
-					<br/><b>Page Size: </b>${currentNode.properties['pageSize'].string}
-					<br/><b>Current Page: </b><span id="displayPage"></span>	
-					<br/> <a href="javascript:void(0)" onclick="dbPaging(-1)">prev</a>|<a href="javascript:void(0)" onclick="dbPaging(1)">next</a>
+					<br/>
+					<br/>
+					<sql:setDataSource dataSource="${currentNode.properties['dataSource'].string}"/> 
+					<sql:query var="items" sql="${currentNode.properties['selectStatement'].string}">
+					</sql:query>
+					<c:set var="resultSet"  value="${items.rowsByIndex}" scope="session"  />	
+					<input type="hidden" id="redirectPath" name="redirectPath" value="<c:url value='${currentNode.path}.sqlPaging.do' context='${url.base}'/>?maxSize=${currentNode.properties['maxRows'].string}">	
+					<div id="resultsContainer">
+						<table cellpadding="0" cellspacing="0" border="0" class="display" id="dbSqlTable">
+							<thead>				
+								<tr>
+									<c:forEach var="rowName" items="${items.columnNames}">
+											<th>${rowName}</th>			
+									</c:forEach>				
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="${fn:length(items.columnNames)}" class="dataTables_empty">Loading data from server</td>
+								</tr>
+							</tbody>
+							<tfoot>
+						
+								<tr>
+									<c:forEach var="rowName" items="${items.columnNames}">
+											<th>${rowName}</th>			
+									</c:forEach>
+								</tr>
+							</tfoot>
+						</table>			    
+					</div>
 				</c:when>
 				<c:otherwise>
-					<br/>The data of this module is shown only on Live and Preview Mode
+					<br/><fmt:message key='jnt_DBSqlDisplay.displayWarningLabel'/>
 				</c:otherwise>
-			</c:choose>
-			<sql:setDataSource dataSource="${currentNode.properties['dataSource'].string}"/> 
-				<sql:query var="items" sql="${currentNode.properties['selectStatement'].string}">
-			</sql:query>
-			
-			<input type="hidden" id="pageSize" name="pageSize" value="${currentNode.properties['pageSize'].string}">
-			<input type="hidden" id="redirectPath" name="redirectPath" value="<c:url value='${currentNode.path}.sqlPaging.do' context='${url.base}'/>">
-			<input type="hidden" id="totalRows" name="totalRows" value="${items.rowCount}">
-			<input type="hidden" id="totalColumns" name="totalColumns" value="${fn:length(items.columnNames)}">
-			<input type="hidden" id="currentPage" name="currentPage" value="1">
-			
-			<div id="resultsContainer">	    
-			     <table border="1" id="results">
-			     <tbody>
-			     <!-- Print table Name -->
-			     <tr><td colspan="${fn:length(items.columnNames)}" class="tableTitle">${currentNode.properties["jcr:title"].string}</td></tr>
-			     <!-- Print Column Names -->
-				     <tr>
-				     	<c:forEach var="rowName" items="${items.columnNames}">
-								<th>${rowName}</th>			
-						</c:forEach>
-					</tr>
-					<c:set var="resultSet"  value="${items.rowsByIndex}" scope="session"  />			
-				<!-- Column Values via AJAX -->	
-				<script type="text/javascript">	
-						printResults($('#redirectPath').val(),$('#pageSize').val(), $('#totalRows').val(), $('#totalColumns').val(), 1);
-						setPage(1);
-				</script>
-				</tbody>			
-			    </table>		
-			</div>		
-</div>
+			</c:choose>		
+		</div>
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				var oTable = $('#dbSqlTable').dataTable( {
+				"bFilter": false,
+				"bSort": false,
+				"bSearchable": false,
+				"bLengthChange": false,
+				"iDisplayLength": ${currentNode.properties['pageSize'].string},
+				"bProcessing": true,
+		        "bServerSide": true,
+		        "sAjaxSource": $('#redirectPath').val()
+				} );
+			} );
+		</script>

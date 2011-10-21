@@ -1,1 +1,48 @@
-SQLDisplay
+Jahia 6.5 - DB Sql Display Module
+ 
+* Goals Overview
+
+  This module displays the results performed by any SQL query configured in the module.  It is displayed only on Live and in Preview Mode. 
+Editors can specify which datasource will be used to execute the query. The presentation of the results uses the
+jQuery UI plugin {{{http://datatables.net/}DataTables}}.
+
+* Characteristics
+
+	* Displays the results of the configured query over an specific datasource.
+	
+	* The results are rendered using {{{http://datatables.net/}DataTables}} and are paginated when necessary. 
+	
+	* The results per page and the maximum number of displayed rows can be controlled from the module.
+	
+	* This module performs AJAX calls to a Jahia Action in order to retrieve the data.
+	
+	* The Response of the Action is in JSON format.
+ 
+* Usage
+
+  To use this module, add the "DB Sql Display" module to any page and fill the following fields:
+
+	* selectStatement (string - mandatory): The query that is going to be executed by this module.
+	
+	* dataSource (string - mandatory): The datasource that is going to be used to run the query.\
+	<<Note:>> If you want to use another datasource, first you need to configure it on your Jahia installation in /tomcat/conf/Catalina/localhost/ROOT.xml.
+	
+	* pageSize (long - mandatory): The maximum number of results displayed per page.
+	
+	* selectStatement (long - mandatory): The maximum number of rows that is going to be considered in the results.
+	
+	  
+* Custom Views
+
+  This module comes with only the "Default" view located on /src/main/webapp/jnt_DBSqlDisplay/html/DBSqlDisplay.jsp.\
+<<Note1:>> If you want to add a new view just create a new jsp file in the folder jnt_DBSqlDisplay/html, following the convention: DBSqlDisplay.<view name>.jsp.\
+<<Note2:>> If you want to customize the styles of this module, you can modify the file src/main/webapp/css/dbSqlDisplay.css. This style sheet contains the default styles of {{{http://datatables.net/}DataTables}}. 
+ 
+* Localization 
+
+  This module has been built in order to support localization. For that reason its jsp uses the tag \<fmt:message\> to display the properties defined in the properties files
+src/main/webapp/resources/SQLDisplay.properties and SQLDisplay_fr.properties. The properties are:
+
+	* jnt_DBSqlDisplay.executeLabel: 
+	
+	* jnt_lastRegisteredUsers.noResults: No results message.

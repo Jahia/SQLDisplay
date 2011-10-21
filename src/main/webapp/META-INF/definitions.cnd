@@ -5,3 +5,4 @@
  - selectStatement (string) i18n mandatory
  - dataSource (string) i18n mandatory
  - pageSize (long) mandatory
+ - maxRows(long) = 1000 mandatory
