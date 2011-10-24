@@ -94,19 +94,19 @@
 }
 
 .paginate_disabled_previous {
-	background-image: url('http://datatables.net/release-datatables/media/images/back_disabled.jpg');
+	background-image: url('/modules/SQLDisplay/img/back_disabled.png');
 }
 
 .paginate_enabled_previous {
-	background-image: url('http://datatables.net/release-datatables/media/images/back_enabled.jpg');
+	background-image: url('/modules/SQLDisplay/img/back_enabled.png');
 }
 
 .paginate_disabled_next {
-	background-image: url('http://datatables.net/release-datatables/media/images/forward_disabled.jpg');
+	background-image: url('/modules/SQLDisplay/img/forward_disabled.png');
 }
 
 .paginate_enabled_next {
-	background-image: url('http://datatables.net/release-datatables/media/images/forward_enabled.jpg');
+	background-image: url('/modules/SQLDisplay/img/forward_enabled.png');
 }
 
 
