@@ -38,6 +38,10 @@
 	padding:0;
 }
 
+#dbModule{
+	overflow:auto;	
+}
+
 .dataTables_wrapper {
 	position: relative;
 	min-height: 302px;

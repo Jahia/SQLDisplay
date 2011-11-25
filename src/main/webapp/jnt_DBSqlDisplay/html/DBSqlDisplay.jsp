@@ -11,9 +11,9 @@
 <template:addResources type="javascript" resources="jquery.min.js"/>
 
 <!-- Sample query: SELECT * FROM jahia.jahia_qrtz_triggers j -->
-		<div id="DB Module">
+		<div id="dbModule">
 			<span class="header">${currentNode.properties["jcr:title"].string}</span>
-			<br/><b><fmt:message key='jnt_DBSqlDisplay.executeLabel'/>:</b> ${currentNode.properties['selectStatement'].string}	
+			<c:if test="${renderContext.editMode}"><br/><b><fmt:message key='jnt_DBSqlDisplay.executeLabel'/>:</b> ${currentNode.properties['selectStatement'].string}	</c:if>
 			<c:choose>
 				<c:when test="${!renderContext.editMode}">
 					<br/>
