@@ -4,7 +4,7 @@
  *  Description:  CSS descriptions for DataTables demo pages
  *  Author:       Allan Jardine
  *  Created:      Tue May 12 06:47:22 BST 2009
- *  Modified:     14 October 2011 by Juan Pablo Albuja
+ *  Modified:     23 May 2012 by Juan Pablo Albuja
  *  Language:     CSS
  *  Project:      DataTables
  *
@@ -39,7 +39,8 @@
 }
 
 #dbModule{
-	overflow:auto;	
+	overflow:auto;
+	height: 100%;	
 }
 
 .dataTables_wrapper {
@@ -98,19 +99,19 @@
 }
 
 .paginate_disabled_previous {
-	background-image: url('/modules/SQLDisplay/img/back_disabled.png');
+	background-image: url('../img/back_disabled.png');
 }
 
 .paginate_enabled_previous {
-	background-image: url('/modules/SQLDisplay/img/back_enabled.png');
+	background-image: url('../img/back_enabled.png');
 }
 
 .paginate_disabled_next {
-	background-image: url('/modules/SQLDisplay/img/forward_disabled.png');
+	background-image: url('../img/forward_disabled.png');
 }
 
 .paginate_enabled_next {
-	background-image: url('/modules/SQLDisplay/img/forward_enabled.png');
+	background-image: url('../img/forward_enabled.png');
 }
 
 
@@ -162,36 +163,6 @@ table.display td {
 table.display td.center {
 	text-align: center;
 }
-
-
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * DataTables sorting
- */
-
-.sorting_asc {
-	background: url('http://datatables.net/release-datatables/media/images/sort_asc.png') no-repeat center right;
-}
-
-.sorting_desc {
-	background: url('http://datatables.net/release-datatables/media/images/sort_desc.png') no-repeat center right;
-}
-
-.sorting {
-	background: url('http://datatables.net/release-datatables/media/images/sort_both.png') no-repeat center right;
-}
-
-.sorting_asc_disabled {
-	background: url('http://datatables.net/release-datatables/media/images/sort_asc_disabled.png') no-repeat center right;
-}
-
-.sorting_desc_disabled {
-	background: url('http://datatables.net/release-datatables/media/images/sort_desc_disabled.png') no-repeat center right;
-}
-
-
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes

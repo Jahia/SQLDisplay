@@ -51,7 +51,7 @@ public class DBSqlPaging extends Action{
 			//Create the returnArray and populate it
 			Object[][] returnArray = null;			
 			int totalRows = 0;
-			if(resultSet!= null){
+			if(resultSet!= null && resultSet.length != 0 && pageSize != 0 && maxSize != 0){
 				totalRows = resultSet.length;
 				totalRows = (totalRows <= maxSize?totalRows:maxSize);
 				//Paging operations
@@ -68,9 +68,11 @@ public class DBSqlPaging extends Action{
 					}
 					returnRowIndex++;
 				}
+				json.put("aaData",returnArray);
+			}else{
+				json.put("aaData","");
 			}
 			//Return JSon
-			json.put("aaData",returnArray);
 			json.put("sEcho", sEcho);
 			json.put("iTotalRecords", totalRows);
 			json.put("iTotalDisplayRecords", totalRows);	
