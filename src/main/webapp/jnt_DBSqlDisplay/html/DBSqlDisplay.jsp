@@ -7,8 +7,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
 <template:addResources type="css" resources="dbSqlDisplay.css"/>
-<template:addResources type="javascript" resources="jquery.dataTables.min.js"/>
 <template:addResources type="javascript" resources="jquery.min.js"/>
+<template:addResources type="javascript" resources="jquery.dataTables.min.js"/>
+
 
 <!-- Sample query: SELECT * FROM jahia.jahia_qrtz_triggers j -->
 		<div id="dbModule">
